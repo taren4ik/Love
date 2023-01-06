@@ -16,7 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles.ProfilesConfig',
+    'profiles',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -49,9 +50,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'love_prim.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -90,3 +88,5 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'profiles.User'
