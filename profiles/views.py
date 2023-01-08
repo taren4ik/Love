@@ -7,12 +7,16 @@ from django.http import HttpResponse
 from .models import User, Category, Follow
 
 
-def profile_detail(request, profole_id):
-    return HttpResponse(f'Профайл {profole_id}')
+def profile_detail(request, profile_id):
+    template = "profiles/index.html"
+    return render(request, template)
 
 
 def profile(request):
     return HttpResponse('Профайл ')
+
+
+
 
 
 def city(request):

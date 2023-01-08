@@ -51,6 +51,7 @@ class User(AbstractUser):
         db_index=True,
         validators=[MaxValueValidator(date.today().year - 18)],
         verbose_name='Год рождения',
+        default=date.today().year - 18
     )
 
     city = models.CharField(
@@ -68,7 +69,7 @@ class User(AbstractUser):
     )
 
     category = models.ForeignKey(
-        Category, blank=True, null=True,
+        Category, null=True,
         on_delete=models.SET_NULL,
         verbose_name='Категория',
         related_name='titles'
@@ -79,7 +80,7 @@ class User(AbstractUser):
                        kwargs={'profile_id': self.pk})
 
     class Meta:
-        ordering = ('category', 'name')
+        # ordering = ('name',)
         verbose_name = 'Профайл'
         verbose_name_plural = 'Профайлы'
 

@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}
-  Последние обновления на сайте
+  Пользователи сайта
 {% endblock %}
 {% block content %}
   <h1>Последние обновления на сайте</h1>
-  {% include 'includes/switcher.html' %}
   {% for post in page_obj %}
-    {% include 'includes/post.html' %}
+    <!--{% include 'includes/post.html' %}
     {% if post.group %}
       <a
-        href="{% url 'posts:group_list' post.group.slug %}"
+        href="{% url 'profiles:profiles' %}"
       >все записи группы</a>
-    {% endif %}
+    {% endif %}-->
     {% if not forloop.last %}
       <hr>
     {% endif %}
