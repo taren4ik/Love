@@ -8,7 +8,7 @@
     <aside class="col-12 col-md-3">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+          Возраст: {{ post.pub_date|date:"d E Y" }}
         </li>
         {% if post.group  %}
           <li class="list-group-item">
@@ -24,19 +24,35 @@
         {% endif %}
           <li class="list-group-item">
             {% if post.author.get_full_name %}
-              Автор: {{ post.author.get_full_name }}
+              Автор: {{ user.name }}
             {% else %}
-              Автор: {{ post.author }}
+              Автор: {{ user.username }}
             {%endif%}
           </li>
-          <li class="list-group-item d-flex justify-content-between
-          align-items-center">
-          Всего постов автора:  <span >{{ post.author.posts.count }}</span>
-        </li>
         <li class="list-group-item">
           <a href="{% url 'posts:profile' post.author %}">
             все посты пользователя
           </a>
+        </li>
+
+        <li>
+          {% if user.is_authenticated %}
+            {% if following %}
+              <a
+                class="btn btn-lg btn-light"
+                href="{% url 'posts:profile_unfollow' author.username %}" role="button"
+              >
+                Отписаться
+              </a>
+            {% elif user != author %}
+              <a
+                class="btn btn-lg btn-primary"
+                href="{% url 'posts:profile_follow' author.username %}" role="button"
+              >
+                Подписаться
+              </a>
+            {% endif %}
+          {% endif %}
         </li>
       </ul>
     </aside>

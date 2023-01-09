@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
   {% include 'includes/switcher.html' %}
-  <h1>Посты авторов, на которых я подписан</h1>
+  <h1>Анкеты, на которые я подписан</h1>
   {% for post in page_obj %}
     {% include 'includes/post.html' %}
     {% if post.group %}

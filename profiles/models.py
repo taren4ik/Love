@@ -90,14 +90,14 @@ class User(AbstractUser):
 
 class Follow(models.Model):
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="follower",
         verbose_name="Подписчик",
         help_text="Пользователь, который подписывается",
     )
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="following",
         verbose_name="Профиль",
@@ -106,3 +106,24 @@ class Follow(models.Model):
 
     def __str__(self):
         return self.user
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="comments",
+        verbose_name="Автор",
+        help_text="Автор анкеты",
+    )
+
+    text = models.TextField()
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата размещения",
+        help_text="Дата размещения комментария",
+    )
+
+    def __str__(self):
+        count_symbol = 15
+        return self.text[:count_symbol]
