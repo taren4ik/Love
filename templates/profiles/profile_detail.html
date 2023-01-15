@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% block title %}
-  Пост {{ post|truncatechars:30 }}
+  Профайл {{ post|truncatechars:30 }}
 {% endblock %}
 {% block content %}
   <div class="row">
     <aside class="col-12 col-md-3">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          Возраст: {{ post.pub_date|date:"d E Y" }}
+          Возраст: {{ profile.year }}
         </li>
-        {% if post.group  %}
+        {% if profile.category  %}
           <li class="list-group-item">
-            Группа: {{post.group}}
-            <a href="{% url 'posts:group_list' post.group.slug %}">
+            Группа: {{profile.category}}
+            <a href="{% url 'profiles:group_list' profile.group.slug %}">
               все записи группы
             </a>
           </li>
@@ -29,25 +29,21 @@
               Автор: {{ user.username }}
             {%endif%}
           </li>
-        <li class="list-group-item">
-          <a href="{% url 'posts:profile' post.author %}">
-            все посты пользователя
-          </a>
-        </li>
-
         <li>
           {% if user.is_authenticated %}
             {% if following %}
               <a
                 class="btn btn-lg btn-light"
-                href="{% url 'posts:profile_unfollow' author.username %}" role="button"
+                href=""
+                role="button"
               >
                 Отписаться
               </a>
             {% elif user != author %}
               <a
                 class="btn btn-lg btn-primary"
-                href="{% url 'posts:profile_follow' author.username %}" role="button"
+                href=""
+                role="button"
               >
                 Подписаться
               </a>
@@ -57,20 +53,20 @@
       </ul>
     </aside>
     <article class="col-12 col-md-9">
-      {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+      {% thumbnail profile.image "960x339" crop="center" upscale=True as im %}
          <img class="card-img my-2" src="{{ im.url }}">
       {% endthumbnail %}
       <p>
-        {{ post.text }}
+        {{ profile.description }}
       </p>
-      {% if post.author == request.user %}
+      {% if profile.name == request.user %}
         <a class="btn btn-primary"
-           href="{% url 'posts:post_edit' post.id %}">
+           href="{% url 'profiles:profile_edit' profile.id %}">
           редактировать запись
         </a>
 
         <a class="btn btn-primary"
-           href="{% url 'posts:post_delete' post.id %}">
+           href="{% url 'profiles:profile_delete' profile.id %}">
           удалить запись
         </a>
       {% endif %}

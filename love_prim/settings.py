@@ -8,6 +8,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'profiles.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,6 +48,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.year.year',
             ],
         },
     },
@@ -91,6 +93,19 @@ USE_L10N = True
 USE_TZ = True
 
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'profiles.User'
+
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "profiles:index"
+# LOGOUT_REDIRECT_URL = "posts:index"
+
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+CSRF_FAILURE_VIEW = "core.views.csrf_failure"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

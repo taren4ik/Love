@@ -1,0 +1,25 @@
+{% load thumbnail %}
+<article>
+  <ul>
+    <li>
+      {% if profile.username %}
+        Автор: {{ profile.username }}
+      {% else %}
+        Автор: {{ profile.username  }}
+      {%endif%}
+    </li>
+    <li>
+      Возраст: {{ profile.year }}
+    </li>
+    <li>
+      Город: {{ profile.city }}
+    </li>
+
+  </ul>
+  {% thumbnail profile.image "960x339" crop="center" upscale=True as im %}
+    <img class="card-img my-2" src="{{ im.url }}">
+  {% endthumbnail %}
+  <p>{{ profile.description|linebreaks }}</p>
+  <a href="{% url 'profiles:profile_detail' profile.id %}"
+  >подробная информация </a>
+</article>

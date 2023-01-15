@@ -15,8 +15,8 @@ CHOICES = (
     ('Ussuriysk', 'Уссурийск'),
 )
 CHOICES_SEX = (
-    ('M', 'Male'),
-    ('F', 'Female')
+    ('M', 'Мужской'),
+    ('F', 'Женский'),
 )
 
 
