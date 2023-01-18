@@ -4,7 +4,28 @@ from . import views
 app_name = 'profiles'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('profile/<int:profile_id>/', views.profile_detail,
+    path("category/<slug:slug>/", views.category_profiles,
+         name="category_profiles"),
+    path("city/<slug:slug>/", views.city, name="city_list"),
+    path('profiles/<int:profile_id>/', views.profile_detail,
          name='profile_detail'),
-    path('city/', views.city),
+
+    path("profiles/<int:profile_id>/delete/", views.profile_delete,
+         name="profile_delete"),
+    path(
+        "profiles/<int:profile_id>/comment/", views.add_comment,
+        name="add_comment"
+    ),
+    path("follow/", views.follow_index, name="follow_index"),
+    path(
+        "profiles/<int:profile_id>/follow/",
+        views.profile_follow,
+        name="profile_follow"
+    ),
+    path(
+        "profile/<int:profile_id>/unfollow/",
+        views.profile_unfollow,
+        name="profile_unfollow"
+    ),
+
 ]

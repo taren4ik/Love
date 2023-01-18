@@ -8,12 +8,20 @@
     <aside class="col-12 col-md-3">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          Возраст: {{ profile.year }}
+          {% if profile.author.get_full_name %}
+            Имя: {{ user.name }}
+          {% else %}
+            Имя: {{ user.username }}
+          {%endif%}
+        </li>
+        <li class="list-group-item">
+          Возраст: {{ age  }}
         </li>
         {% if profile.category  %}
           <li class="list-group-item">
             Группа: {{profile.category}}
-            <a href="{% url 'profiles:group_list' profile.group.slug %}">
+            <a
+                    href="{% url 'profiles:category_profiles' profile.category.slug %}">
               все записи группы
             </a>
           </li>
@@ -22,36 +30,30 @@
             Группа: Отсутствует группа
           </li>
         {% endif %}
-          <li class="list-group-item">
-            {% if post.author.get_full_name %}
-              Автор: {{ user.name }}
-            {% else %}
-              Автор: {{ user.username }}
-            {%endif%}
-          </li>
-        <li>
-          {% if user.is_authenticated %}
-            {% if following %}
-              <a
-                class="btn btn-lg btn-light"
-                href=""
-                role="button"
-              >
-                Отписаться
-              </a>
-            {% elif user != author %}
-              <a
-                class="btn btn-lg btn-primary"
-                href=""
-                role="button"
-              >
-                Подписаться
-              </a>
-            {% endif %}
+
+
+        {% if user.is_authenticated %}
+          {% if following %}
+            <a
+              class="btn btn-lg btn-light"
+              href=""
+              role="button"
+            >
+              Отписаться
+            </a>
+          {% elif user != author %}
+            <a
+              class="btn btn-lg btn-primary"
+              href=""
+              role="button"
+            >
+              Подписаться
+            </a>
           {% endif %}
-        </li>
+        {% endif %}
       </ul>
     </aside>
+
     <article class="col-12 col-md-9">
       {% thumbnail profile.image "960x339" crop="center" upscale=True as im %}
          <img class="card-img my-2" src="{{ im.url }}">
@@ -60,10 +62,6 @@
         {{ profile.description }}
       </p>
       {% if profile.name == request.user %}
-        <a class="btn btn-primary"
-           href="{% url 'profiles:profile_edit' profile.id %}">
-          редактировать запись
-        </a>
 
         <a class="btn btn-primary"
            href="{% url 'profiles:profile_delete' profile.id %}">

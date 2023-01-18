@@ -3,12 +3,12 @@
   Записи сообщества – {{ group }}
 {% endblock %}
 {% block content %}
-  <h1>{{ group }}</h1>
+  <h1>{{ category }}</h1>
   <p>
-    {{ group.description }}
+    {{ category.description }}
   </p>
-  {% for post in page_obj %}
-    {% include 'includes/post.html' %}
+  {% for profile in page_obj %}
+    {% include 'includes/profile.html' %}
     {% if not forloop.last %}
       <hr>
     {% endif %}

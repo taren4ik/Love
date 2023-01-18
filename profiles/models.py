@@ -72,7 +72,7 @@ class User(AbstractUser):
         Category, null=True,
         on_delete=models.SET_NULL,
         verbose_name='Категория',
-        related_name='titles'
+        related_name='users'
     )
 
     def get_absolute_url(self):
