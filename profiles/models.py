@@ -79,6 +79,9 @@ class User(AbstractUser):
         return reverse('profiles:profile_detail',
                        kwargs={'profile_id': self.pk})
 
+    USERNAME_FIELD = 'phone'
+    REQUIRED_FIELDS = ['name', 'year', 'sex', 'city']
+
     class Meta:
         # ordering = ('name',)
         verbose_name = 'Профайл'
@@ -109,10 +112,18 @@ class Follow(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(
+    profile = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="comments",
+        verbose_name="Комментарий",
+        help_text="Текст комментария",
+    )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="comment",
         verbose_name="Автор",
         help_text="Автор анкеты",
     )

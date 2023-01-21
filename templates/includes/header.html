@@ -7,7 +7,7 @@
         <span style="color:black">Lo</span>ve
       </a>
 
-      {% with request.resolver_match.view_name as view_name %}
+      {% with request.resolver_match.view_name as view_name %} <!-- Подмена переменной -->
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}" href="{% url 'about:author' %}">Об авторе</a>
@@ -24,7 +24,7 @@
             <a class="nav-link link-light {% if view_name  == 'users:logout' %}active{% endif %}" href="{% url 'users:logout' %}">Выйти
             </a>
           </li>
-          <li>
+          <li class="nav-item" style="display:inline-block">
             Пользователь: {{ user.username }}
           <li>
           {% else %}

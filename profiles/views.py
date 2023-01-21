@@ -23,7 +23,7 @@ def index(request):
     paginator = Paginator(profile_list, COUNT_PROFILES)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-
+    print(paginator)
     context = {
         "page_obj": page_obj,
     }
@@ -47,16 +47,16 @@ def profile_detail(request, profile_id):
     template = 'profiles/profile_detail.html'
     profile = get_object_or_404(User.objects.select_related('name'),
                                 id=profile_id)
-    comments = Comment.objects.filter(author_id=profile_id)
+    comments = Comment.objects.filter(profile_id=profile_id)
     age = get_age(profile_id)
     form = CommentForm(request.FILES or None)
-    print(age)
     context = {
         "profile": profile,
         "form": form,
         "comments": comments,
-        'age': age
+        'age': age,
     }
+
     return render(request, template, context)
 
 
@@ -68,15 +68,15 @@ def profile_delete(request, post_id):
 
 
 @login_required
-def add_comment(request, post_id):
-    profile = get_object_or_404(User, id=post_id)
+def add_comment(request, profile_id):
+    profile = get_object_or_404(User, id=profile_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
         comment = form.save(commit=False)
         comment.author = request.user
         comment.profile = profile
         comment.save()
-    return redirect(index)
+    return redirect(profile)
 
 
 @login_required

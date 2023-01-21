@@ -8,10 +8,10 @@
     <aside class="col-12 col-md-3">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          {% if profile.author.get_full_name %}
-            Имя: {{ user.name }}
+          {% if profile.first_name %}
+            Имя: {{ profile.first_name }}
           {% else %}
-            Имя: {{ user.username }}
+            Имя: {{ profile.username }}
           {%endif%}
         </li>
         <li class="list-group-item">
@@ -62,7 +62,6 @@
         {{ profile.description }}
       </p>
       {% if profile.name == request.user %}
-
         <a class="btn btn-primary"
            href="{% url 'profiles:profile_delete' profile.id %}">
           удалить запись
