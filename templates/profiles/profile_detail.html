@@ -36,7 +36,7 @@
           {% if following %}
             <a
               class="btn btn-lg btn-light"
-              href=""
+              href="{% url 'profiles:profile_unfollow' profile.id %}"
               role="button"
               style="background-color: #ff85cf"
             >
@@ -45,7 +45,7 @@
           {% elif user != author %}
             <a
               class="btn btn-lg btn-primary"
-              href=""
+              href="{% url 'profiles:profile_follow' profile.id %}"
               role="button"
               style="background-color: #ff85cf; color: black; border: 2px solid black;"
             >

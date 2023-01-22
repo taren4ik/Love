@@ -20,6 +20,8 @@
     <img class="card-img my-2" src="{{ im.url }}">
   {% endthumbnail %}
   <p>{{ profile.description|linebreaks }}</p>
+  {% if user.is_authenticated %}
   <a href="{% url 'profiles:profile_detail' profile.id %}"
   >подробная информация </a>
+  {% endif %}
 </article>

@@ -6,10 +6,10 @@
   {% include 'includes/switcher.html' %}
   <h1>Анкеты, на которые я подписан</h1>
   {% for post in page_obj %}
-    {% include 'includes/post.html' %}
-    {% if post.group %}
+    {% include 'includes/profile.html' %}
+    {% if profile.category %}
       <a
-        href="{% url 'posts:group_list' post.group.slug %}"
+        href="{% url 'posts:category_list' profile.category.slug %}"
       >все записи группы</a>
     {% endif %}
     {% if not forloop.last %}

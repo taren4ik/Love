@@ -81,11 +81,10 @@ def add_comment(request, profile_id):
 
 @login_required
 def follow_index(request):
-    template = "profile/follow.html"
+    template = "profiles/follow.html"
     authors_ids = Follow.objects.filter(
         user=request.user).values_list('author_id', flat=True)  # input in list
-    profiles = User.objects.filter(author_id__in=authors_ids)
-    print(profiles)
+    profiles = User.objects.filter(id__in=authors_ids)
     paginator = Paginator(profiles, COUNT_PROFILES)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -96,22 +95,22 @@ def follow_index(request):
 
 
 @login_required
-def profile_follow(request, username):
-    print(username)
-    author = get_object_or_404(User, username=username)
-    if author != request.user:
-        Follow.objects.get_or_create(user=request.user, author=author)
-    return redirect("profiles:profile_detail", author)
+def profile_follow(request, profile_id):
+    author_id = get_object_or_404(User, id=profile_id)
+    if author_id != request.user.pk:
+        Follow.objects.get_or_create(user=request.user,
+                                     author=author_id)
+    return redirect("profiles:profile_detail", author_id)
 
 
 @login_required
-def profile_unfollow(request, username):
-    author = get_object_or_404(User, username=username)
+def profile_unfollow(request, profile_id):
+    author_id = get_object_or_404(User, id=profile_id)
     user_follow = get_object_or_404(Follow.objects,
-                                    user=request.user,
-                                    author=author)
+                                    user_id=request.user.pk,
+                                    author_id=author_id)
     user_follow.delete()
-    return redirect("profiles:profile_detail", author)
+    return redirect("profiles:profile_detail", author_id)
 
 
 def city(request):

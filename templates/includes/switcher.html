@@ -4,18 +4,18 @@
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a
-          class="nav-link {% if view_name  == 'posts:index' %}active{% endif %}"
-          href="{% url 'posts:index' %}"
+          class="nav-link {% if view_name  == 'profiles:index' %}active{% endif %}"
+          href="{% url 'profiles:index' %}"
         >
           Все пользователи
         </a>
       </li>
       <li class="nav-item">
         <a
-           class="nav-link {% if view_name  == 'posts:follow_index' %}active{% endif %}"
-           href="{% url 'posts:follow_index' %}"
+           class="nav-link {% if view_name  == 'profiles:follow_index' %}active{% endif %}"
+           href="{% url 'profiles:follow_index' %}"
         >
-          Избранные пользователи
+          Избранные профайлы
         </a>
       </li>
     </ul>

@@ -4,6 +4,7 @@
 {% endblock %}
 {% block content %}
   <h1>Последние обновления на сайте</h1>
+  {% include 'includes/switcher.html' %}
   {% for profile in page_obj %}
     {% include 'includes/profile.html' %}
     {% if not forloop.last %}
