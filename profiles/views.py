@@ -45,7 +45,7 @@ def category_profiles(request, slug):
 
 def profile_detail(request, profile_id):
     template = 'profiles/profile_detail.html'
-    profile = get_object_or_404(User.objects.select_related('name'),
+    profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
     comments = Comment.objects.filter(profile_id=profile_id)
     age = get_age(profile_id)
@@ -61,8 +61,8 @@ def profile_detail(request, profile_id):
 
 
 @login_required
-def profile_delete(request, post_id):
-    profile = User.objects.get(id=post_id)
+def profile_delete(request, profile_id):
+    profile = User.objects.get(id=profile_id)
     profile.delete()
     return redirect("profiles:index", username=request.user)
 
@@ -83,8 +83,9 @@ def add_comment(request, profile_id):
 def follow_index(request):
     template = "profile/follow.html"
     authors_ids = Follow.objects.filter(
-        user=request.user).values_list('author_id', flat=True)
+        user=request.user).values_list('author_id', flat=True)  # input in list
     profiles = User.objects.filter(author_id__in=authors_ids)
+    print(profiles)
     paginator = Paginator(profiles, COUNT_PROFILES)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -96,6 +97,7 @@ def follow_index(request):
 
 @login_required
 def profile_follow(request, username):
+    print(username)
     author = get_object_or_404(User, username=username)
     if author != request.user:
         Follow.objects.get_or_create(user=request.user, author=author)

@@ -30,11 +30,6 @@ class Category(models.Model):
 
 
 class User(AbstractUser):
-    name = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE,
-                                verbose_name='Владелец профайла',
-                                related_name='profiles',
-                                null=True, )
 
     phone = PhoneNumberField(null=False, unique=True)
     image = models.ImageField(
@@ -80,7 +75,7 @@ class User(AbstractUser):
                        kwargs={'profile_id': self.pk})
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['name', 'year', 'sex', 'city']
+    REQUIRED_FIELDS = ['username', 'year', 'sex', 'city']
 
     class Meta:
         # ordering = ('name',)
@@ -88,7 +83,7 @@ class User(AbstractUser):
         verbose_name_plural = 'Профайлы'
 
     def __str__(self):
-        return f'Name {self.name}, phone: {self.phone}, born: {self.year}'
+        return f'Name {self.username}, phone: {self.phone}, born: {self.year}'
 
 
 class Follow(models.Model):

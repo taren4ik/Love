@@ -38,6 +38,7 @@
               class="btn btn-lg btn-light"
               href=""
               role="button"
+              style="background-color: #ff85cf"
             >
               Отписаться
             </a>
@@ -46,6 +47,7 @@
               class="btn btn-lg btn-primary"
               href=""
               role="button"
+              style="background-color: #ff85cf; color: black; border: 2px solid black;"
             >
               Подписаться
             </a>
@@ -61,10 +63,10 @@
       <p>
         {{ profile.description }}
       </p>
-      {% if profile.name == request.user %}
+      {% if profile.username == request.user %}
         <a class="btn btn-primary"
            href="{% url 'profiles:profile_delete' profile.id %}">
-          удалить запись
+          удалить профайл
         </a>
       {% endif %}
       {% include 'includes/comments.html' %}
