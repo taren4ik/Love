@@ -50,11 +50,16 @@ def profile_detail(request, profile_id):
     comments = Comment.objects.filter(profile_id=profile_id)
     age = get_age(profile_id)
     form = CommentForm(request.FILES or None)
+    author = get_object_or_404(User, id=profile_id)
+    following = False
+    if request.user.is_authenticated and author != request.user:
+        following = author.following.filter(user=request.user).exists()
     context = {
         "profile": profile,
         "form": form,
         "comments": comments,
         'age': age,
+        'following': following
     }
 
     return render(request, template, context)
@@ -99,18 +104,18 @@ def profile_follow(request, profile_id):
     author = get_object_or_404(User, id=profile_id)
     if author.id != request.user.pk:
         Follow.objects.get_or_create(user=request.user,
-                                     author=author.id)
+                                     author=author)
     return redirect("profiles:profile_detail", author.id)
 
 
 @login_required
 def profile_unfollow(request, profile_id):
-    author_id = get_object_or_404(User, id=profile_id)
+    author = get_object_or_404(User, id=profile_id)
     user_follow = get_object_or_404(Follow.objects,
-                                    user_id=request.user.pk,
-                                    author_id=author_id)
+                                    user=request.user,
+                                    author=author)
     user_follow.delete()
-    return redirect("profiles:profile_detail", author_id)
+    return redirect("profiles:profile_detail", author.id)
 
 
 def city(request):

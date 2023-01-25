@@ -23,7 +23,7 @@ urlpatterns = [
         name="profile_follow"
     ),
     path(
-        "profile/<int:profile_id>/unfollow/",
+        "profiles/<int:profile_id>/unfollow/",
         views.profile_unfollow,
         name="profile_unfollow"
     ),
