@@ -18,6 +18,9 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item">
+            <a class="nav-link link-light {% if view_name  == 'users:profile_change_form' %}active{% endif %}" href="{%url 'users:profile_change_form' %}">Изменить профиль</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link link-light {% if view_name  == 'users:password_change_form' %}active{% endif %}" href="{%url 'users:password_change_form' %}">Изменить пароль</a>
           </li>
           <li class="nav-item">

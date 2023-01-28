@@ -17,6 +17,12 @@
         <li class="list-group-item">
           Возраст: {{ age  }}
         </li>
+        <li class="list-group-item">
+          Обо мне: {{ profile.description  }}
+        </li>
+        <li class="list-group-item">
+          Тедефон: {{ profile.phone|truncatechars:6  }}
+        </li>
         {% if profile.category  %}
           <li class="list-group-item">
             Группа: {{profile.category}}

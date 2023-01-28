@@ -54,6 +54,7 @@ def profile_detail(request, profile_id):
     following = False
     if request.user.is_authenticated and author != request.user:
         following = author.following.filter(user=request.user).exists()
+
     context = {
         "profile": profile,
         "form": form,

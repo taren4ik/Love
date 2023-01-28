@@ -1,10 +1,27 @@
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.contrib.auth import get_user_model
 
-from .forms import CreationForm
+from .forms import CreationForm, ChangeForm
+
+User = get_user_model()
 
 
 class SignUp(CreateView):
     form_class = CreationForm
     success_url = reverse_lazy("profiles:index")
     template_name = "users/signup.html"
+
+
+def ProfileChange(request):
+    user = get_object_or_404(User, pk=request.user.pk)
+    if request.method == "POST":
+        form = ChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            return redirect('profiles/profile_detail', pk=user.pk)
+    else:
+        form = ChangeForm(instance=user)
+    return render(request,'users/profile_change_form.html',  {'form': form})

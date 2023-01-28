@@ -10,3 +10,12 @@ class CreationForm(UserCreationForm):
         fields = (
             'first_name', 'username', 'phone', 'email', 'sex', 'city', 'year',
             'image')
+
+
+class ChangeForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = (
+            'first_name', 'phone', 'email', 'sex', 'city', 'year',
+            'image')
+

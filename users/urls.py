@@ -2,8 +2,12 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordChangeDoneView,
                                        PasswordChangeView,
                                        PasswordResetDoneView,
-                                       PasswordResetView)
+                                       PasswordResetView,
+                                       )
+from .views import ProfileChange
+
 from django.urls import path
+
 
 from . import views
 
@@ -19,6 +23,7 @@ urlpatterns = [
     path(
         "login/", LoginView.as_view(
             template_name="users/login.html"), name="login"),
+    path("profile_change/", views.ProfileChange, name="profile_change_form"),
 
     path(
         "password_reset/",
