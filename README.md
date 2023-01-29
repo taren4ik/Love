@@ -14,7 +14,7 @@
 
 ```
 bash
-git clone https://github.com/Lets-dancing/api_yamdb
+git clone https://github.com/taren4ik/Love
 cd api_yamdb
 ```
 
