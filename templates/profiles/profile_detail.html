@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% block title %}
-  Профайл {{ post|truncatechars:30 }}
+  Профайл {{ profile.description |truncatechars:30 }}
 {% endblock %}
 {% block content %}
   <div class="row">

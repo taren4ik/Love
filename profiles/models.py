@@ -103,7 +103,7 @@ class Follow(models.Model):
     )
 
     def __str__(self):
-        return self.user
+        return f'Name {self.user}'
 
 
 class Comment(models.Model):

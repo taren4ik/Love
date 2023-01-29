@@ -4,7 +4,6 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetDoneView,
                                        PasswordResetView,
                                        )
-from .views import ProfileChange
 
 from django.urls import path
 

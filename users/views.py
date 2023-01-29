@@ -21,7 +21,7 @@ def ProfileChange(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            return redirect('profiles/profile_detail', pk=user.pk)
+            return redirect('profiles:profile_detail', request.user.pk)
     else:
         form = ChangeForm(instance=user)
-    return render(request,'users/profile_change_form.html',  {'form': form})
+    return render(request, 'users/profile_change_form.html',  {'form': form})
