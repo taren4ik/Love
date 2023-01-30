@@ -48,7 +48,7 @@
             >
               Отписаться
             </a>
-          {% elif user != author %}
+          {% elif user != profile %}
             <a
               class="btn btn-lg btn-primary"
               href="{% url 'profiles:profile_follow' profile.id %}"
