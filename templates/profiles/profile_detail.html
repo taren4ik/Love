@@ -48,7 +48,7 @@
             >
               Отписаться
             </a>
-          {% elif user != profile %}
+          {% elif request.user != profile %}
             <a
               class="btn btn-lg btn-primary"
               href="{% url 'profiles:profile_follow' profile.id %}"
@@ -69,7 +69,7 @@
       <p>
         {{ profile.description }}
       </p>
-      {% if profile.username == request.user %}
+      {% if profile == request.user.pk %}
         <a class="btn btn-primary"
            href="{% url 'profiles:profile_delete' profile.id %}">
           удалить профайл
