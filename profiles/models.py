@@ -133,3 +133,28 @@ class Comment(models.Model):
     def __str__(self):
         count_symbol = 15
         return self.text[:count_symbol]
+
+
+class Message(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="sender",
+        verbose_name="Комментарий",
+        help_text="Текст комментария",
+    )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="answer",
+        verbose_name="Автор",
+        help_text="Автор анкеты",
+    )
+
+    text = models.TextField()
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата отправки",
+        help_text="Дата отправки сообщения",
+    )
