@@ -16,8 +16,14 @@ class SignUp(CreateView):
 
 def ProfileChange(request):
     user = get_object_or_404(User, pk=request.user.pk)
+
+    if user.pk != request.user.pk:
+        return redirect("profiles:profile_detail", request.user.pk)
     if request.method == "POST":
-        form = ChangeForm(request.POST, instance=user)
+        form = ChangeForm(
+            request.POST or None,
+            files=request.FILES or None,
+            instance=user)
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
