@@ -37,31 +37,31 @@
           </li>
         {% endif %}
 
-
-        {% if user.is_authenticated %}
-          {% if following %}
-            <a
-              class="btn btn-lg btn-light"
-              href="{% url 'profiles:profile_unfollow' profile.id %}"
-              role="button"
-              style="background-color: #ff85cf"
-            >
-              Отписаться
-            </a>
-          {% elif request.user != profile %}
-            <a
-              class="btn btn-lg btn-primary"
-              href="{% url 'profiles:profile_follow' profile.id %}"
-              role="button"
-              style="background-color: #ff85cf; color: black; border: 2px solid black;"
-            >
-              Подписаться
-            </a>
-          {% endif %}
-        {% endif %}
+        <li class="list-group-item">
+          {% if user.is_authenticated %}
+            {% if following %}
+              <a
+                class="btn btn-lg btn-light"
+                href="{% url 'profiles:profile_unfollow' profile.id %}"
+                role="button"
+                style="background-color: #ff85cf"
+              >
+                Отписаться
+              </a>
+            {% elif request.user.pk != profile.pk %}
+              <a
+                class="btn btn-lg btn-primary"
+                href="{% url 'profiles:profile_follow' profile.id %}"
+                role="button"
+                style="background-color: #ff85cf; color: black; border: 2px solid black;"
+              >
+                Подписаться
+              </a>
+            {% endif %}
+            {% endif %}
+        </li>
       </ul>
     </aside>
-
     <article class="col-12 col-md-9">
       {% thumbnail profile.image "960x339" crop="center" upscale=True as im %}
          <img class="card-img my-2" src="{{ im.url }}">
@@ -69,12 +69,6 @@
       <p>
         {{ profile.description }}
       </p>
-      {% if profile == request.user.pk %}
-        <a class="btn btn-primary"
-           href="{% url 'profiles:profile_delete' profile.id %}">
-          удалить профайл
-        </a>
-      {% endif %}
       {% include 'includes/comments.html' %}
     </article>
 

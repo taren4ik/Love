@@ -140,16 +140,16 @@ class Message(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="sender",
-        verbose_name="Комментарий",
-        help_text="Текст комментария",
+        verbose_name="Получатель",
+        help_text="Получатель сообщения",
     )
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="answer",
-        verbose_name="Автор",
-        help_text="Автор анкеты",
+        verbose_name="Отправитель сообщения",
+        help_text="Отправитель",
     )
 
     text = models.TextField()

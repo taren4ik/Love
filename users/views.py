@@ -24,4 +24,8 @@ def ProfileChange(request):
             return redirect('profiles:profile_detail', request.user.pk)
     else:
         form = ChangeForm(instance=user)
-    return render(request, 'users/profile_change_form.html',  {'form': form})
+    context = {
+        "form": form,
+        "user": user,
+    }
+    return render(request, 'users/profile_change_form.html',   context)

@@ -8,4 +8,13 @@
       </div>
     </div>
   </div>
+  {% if request.user.pk == user.pk %}
+  <div  align="right">
+         <a class="btn btn-primary"
+            style="background-color: red; width: 100%; border: 0px"
+            href="{% url 'profiles:profile_delete' user.id %}">
+            удалить профайл
+         </a>
+  </div>
+  {% endif %}
 {% endblock %}

@@ -70,7 +70,7 @@ def profile_detail(request, profile_id):
 def profile_delete(request, profile_id):
     profile = User.objects.get(id=profile_id)
     profile.delete()
-    return redirect("profiles:index", username=request.user)
+    return redirect("profiles:index")
 
 
 @login_required
