@@ -111,8 +111,8 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="comments",
-        verbose_name="Комментарий",
-        help_text="Текст комментария",
+        verbose_name="Комментатор",
+        help_text="Автор коммента",
     )
 
     author = models.ForeignKey(
@@ -123,7 +123,9 @@ class Comment(models.Model):
         help_text="Автор анкеты",
     )
 
-    text = models.TextField()
+    text = models.TextField(
+        verbose_name="Комментарий",
+        help_text="Текст комментария",)
     created = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата размещения",

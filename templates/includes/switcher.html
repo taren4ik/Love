@@ -18,6 +18,14 @@
           Избранные профайлы
         </a>
       </li>
+      <li class="nav-item">
+        <a
+           class="nav-link {% if view_name  == 'profiles:message' %}active{% endif %}"
+           href="{% url 'profiles:message' user.id %}"
+        >
+          Сообщения
+        </a>
+      </li>
     </ul>
     {% endwith %}
   </div>

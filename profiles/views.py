@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_page
 from django.http import HttpResponse
 
 from .models import User, Comment, Category, Follow
-from .forms import CommentForm
+from .forms import CommentForm, MessageForm
 
 COUNT_PROFILES = 10
 
@@ -83,6 +83,19 @@ def add_comment(request, profile_id):
         comment.profile = profile
         comment.save()
     return redirect(profile)
+
+
+@login_required
+def message(request, profile_id):
+    template = "profiles/message.html"
+    user = get_object_or_404(User, id=profile_id)
+    form = MessageForm(request.POST or None)
+    if form.is_valid():
+        message = form.save(commit=False)
+        message.author = request.user
+        message.user = user
+        message.save()
+    return render(request, template)
 
 
 @login_required

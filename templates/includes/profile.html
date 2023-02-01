@@ -1,27 +1,33 @@
 {% load thumbnail %}
-<article>
-  <ul>
-    <li>
-      {% if profile.first_name %}
-        Автор: {{ profile.first_name }}
-      {% else %}
-        Автор: {{ profile.username  }}
-      {%endif%}
-    </li>
-    <li>
-      Возраст: {{ profile.year }}
-    </li>
-    <li>
-      Город: {{ profile.city }}
-    </li>
+<div class="row">
+  <article class="col-12 col-md-3">
+    <ul>
+      <li>
+        {% if profile.first_name %}
+          Автор: {{ profile.first_name }}
+        {% else %}
+          Автор: {{ profile.username  }}
+        {%endif%}
+      </li>
+      <li>
+        Возраст: {{ profile.year }}
+      </li>
+      <li>
+        Город: {{ profile.city }}
+      </li>
+      <li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'profiles:profile_detail' profile.id %}"
+        >подробная информация </a>
+        {% endif %}
+      </li>
+    </ul>
+  </article>
+    <div class="col-9 col-sm-9 col-md-3 col-lg-3 col-xl-3">
+      {% thumbnail profile.image "960x339" crop="right" upscale=True as im %}
+        <img class="card-img my-2" src="{{ im.url }}">
+      {% endthumbnail %}
+    </div>
+    <p>{{ profile.description|linebreaks }}</p>
 
-  </ul>
-  {% thumbnail profile.image "960x339" crop="right" upscale=True as im %}
-    <img class="card-img my-2" src="{{ im.url }}">
-  {% endthumbnail %}
-  <p>{{ profile.description|linebreaks }}</p>
-  {% if user.is_authenticated %}
-  <a href="{% url 'profiles:profile_detail' profile.id %}"
-  >подробная информация </a>
-  {% endif %}
-</article>
+</div>

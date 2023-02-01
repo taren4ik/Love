@@ -16,6 +16,10 @@ urlpatterns = [
         "profiles/<int:profile_id>/comment/", views.add_comment,
         name="add_comment"
     ),
+    path(
+        "profiles/<int:profile_id>/message/", views.message,
+        name="message"
+    ),
     path("follow/", views.follow_index, name="follow_index"),
     path(
         "profiles/<int:profile_id>/follow/",
