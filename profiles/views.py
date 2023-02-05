@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponse
 
-from .models import User, Comment, Category, Follow
+from .models import User, Comment, Category, Follow, Message
 from .forms import CommentForm, MessageForm
 
 COUNT_PROFILES = 10
@@ -75,6 +75,7 @@ def profile_delete(request, profile_id):
 
 @login_required
 def add_comment(request, profile_id):
+    """"Отправляет комментарий."""
     profile = get_object_or_404(User, id=profile_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
@@ -86,16 +87,26 @@ def add_comment(request, profile_id):
 
 
 @login_required
-def message(request, profile_id):
+def send_message(request, profile_id):
+    """"Отправляет сообщения."""
     template = "profiles/message.html"
-    user = get_object_or_404(User, id=profile_id)
+    profile = get_object_or_404(User.objects.select_related('category'),
+                                id=profile_id)
+    messages = (Message.objects.filter(author=request.user, user=profile) |
+    Message.objects.filter(author=profile, user=request.user))
     form = MessageForm(request.POST or None)
     if form.is_valid():
         message = form.save(commit=False)
         message.author = request.user
-        message.user = user
+        message.user = profile
         message.save()
-    return render(request, template)
+
+    context = {
+        "profile": profile,
+        "form": form,
+        "messages": messages
+    }
+    return render(request, template, context)
 
 
 @login_required

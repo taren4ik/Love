@@ -11,5 +11,5 @@ class CommentForm(forms.ModelForm):
 
 class MessageForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = Message
         fields = ("text",)

@@ -58,8 +58,23 @@
                 Подписаться
               </a>
             {% endif %}
-            {% endif %}
+          {% endif %}
         </li>
+
+        {% if user.is_authenticated %}
+          {% if request.user.pk != profile.pk %}
+          <li class="list-group-item">
+            <a
+              class="btn btn-lg btn-light"
+              href="{% url 'profiles:send_message' profile.id %}"
+              role="button"
+              style="background-color: #ff85cf; color: black; border: 2px solid black;"
+            >
+              Написать сообщение
+            </a>
+          </li>
+          {% endif %}
+        {% endif %}
       </ul>
     </aside>
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">

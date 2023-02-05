@@ -21,7 +21,7 @@
       <li class="nav-item">
         <a
            class="nav-link {% if view_name  == 'profiles:message' %}active{% endif %}"
-           href="{% url 'profiles:message' user.id %}"
+           href="{% url 'profiles:send_message' user.id %}"
         >
           Сообщения
         </a>

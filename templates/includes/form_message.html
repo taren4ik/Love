@@ -1,0 +1,48 @@
+{% load user_filters %}
+
+{% if user.is_authenticated %}
+  {% if request.user.pk != profile.pk %}
+    <div class="card my-4">
+      <h5 class="card-header">Написать сообщение:</h5>
+      <div class="card-body">
+        <form method="post"
+              action="{% url 'profiles:send_message' profile.id %}">
+          {% csrf_token %}
+          <div class="form-group mb-2">
+            {{ form.text|addclass:"form-control" }}
+          </div>
+          <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+<table width="50%" border="2" cellpadding="1">
+  <caption style="caption-side:" > Переписка</caption>
+  <th>Отправитель</th><th>Получатель</th><th>Сообщение</th>
+  {% for message in messages %}
+  <tbody>
+    <tr>
+      <td>{{ message.author.username }}</td>
+<!--      <td>{{ message.user.username }}</td>-->
+      <td><a href="{% url 'profiles:send_message' message.user.id %}">{{ message.user.username }}</a></td>
+      <td>{{ message.text }}</td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+<!--{% for message in messages %}-->
+<!--  <div class="media mb-4">-->
+<!--    <div class="media-body">-->
+<!--      <h5 class="mt-0">-->
+<!--        <a href="{% url 'profiles:profile_detail' profile.id %}">-->
+<!--          {{ message.author.username }}-->
+<!--        </a>-->
+<!--      </h5>-->
+<!--        <p>-->
+<!--         {{ message.text }}-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--{% endfor %}-->
