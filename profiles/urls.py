@@ -20,7 +20,7 @@ urlpatterns = [
         "profiles/<int:profile_id>/message/", views.send_message,
         name="send_message"
     ),
-
+    path("message/", views.index_message, name="index_message"),
     path("follow/", views.follow_index, name="follow_index"),
     path(
         "profiles/<int:profile_id>/follow/",

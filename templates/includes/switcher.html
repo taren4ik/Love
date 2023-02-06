@@ -20,8 +20,8 @@
       </li>
       <li class="nav-item">
         <a
-           class="nav-link {% if view_name  == 'profiles:message' %}active{% endif %}"
-           href="{% url 'profiles:send_message' user.id %}"
+           class="nav-link {% if view_name  == 'profiles:index_message' %}active{% endif %}"
+           href="{% url 'profiles:index_message' %}"
         >
           Сообщения
         </a>

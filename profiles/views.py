@@ -93,7 +93,7 @@ def send_message(request, profile_id):
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
     messages = (Message.objects.filter(author=request.user, user=profile) |
-    Message.objects.filter(author=profile, user=request.user))
+    Message.objects.filter(author=profile, user=request.user)).order_by('id')
     form = MessageForm(request.POST or None)
     if form.is_valid():
         message = form.save(commit=False)
@@ -105,6 +105,20 @@ def send_message(request, profile_id):
         "profile": profile,
         "form": form,
         "messages": messages
+    }
+    return render(request, template, context)
+
+@login_required
+def index_message(request):
+    """"Вывод сообщений пользователя."""
+    template = 'profiles/index_message.html'
+    profile = get_object_or_404(User.objects.select_related('category'),
+                                id=request.user.pk)
+    messages = (Message.objects.filter(author_id=request.user.pk) |
+                Message.objects.filter(user_id=request.user.pk)).order_by('id')
+    context = {
+        "messages": messages,
+        "profile": profile,
     }
     return render(request, template, context)
 
