@@ -29,15 +29,29 @@ class Category(models.Model):
         return self.title
 
 
-class User(AbstractUser):
+# class Photo(models.Model):
+#     image = models.ImageField(
+#         upload_to='profiles/',
+#         blank=True,
+#         verbose_name='Фото профиля',)
+#
+#     user = models.ForeignKey(
+#         settings.AUTH_USER_MODEL,
+#         on_delete=models.CASCADE,
+#         related_name='photos')
+#
+#     class Meta:
+#         verbose_name = 'Фотография'
+#         verbose_name_plural = 'Фотографии'
 
+
+class User(AbstractUser):
     phone = PhoneNumberField(null=False, unique=True)
     image = models.ImageField(
         upload_to='profiles/',
         blank=True,
         verbose_name='Фото профиля',
     )
-
     description = models.TextField(
         blank=True, verbose_name='Описание анкеты'
     )
@@ -125,7 +139,7 @@ class Comment(models.Model):
 
     text = models.TextField(
         verbose_name="Комментарий",
-        help_text="Текст комментария",)
+        help_text="Текст комментария", )
     created = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата размещения",
