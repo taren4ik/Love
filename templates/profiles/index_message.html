@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}
+  Профайл {{ profile.description |truncatechars:30 }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <table width="50%" border="2" cellpadding="1">
+    <caption style="caption-side:" > Переписка</caption>
+    <th>Отправитель</th><th>Получатель</th><th>Сообщение</th>
+    {% for message in messages %}
+      <tbody>
+        <tr>
+          <td>{{ message.author.username }}</td>
+          <td><a href="{% url 'profiles:send_message' message.user.id %}">{{ message.user.username }}</a></td>
+          <td>{{ message.text }}</td>
+        </tr>
+      </tbody>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
