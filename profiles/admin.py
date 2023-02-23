@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Follow, Category, User, Message, Comment
+from .models import Follow, Category, User, Message, Comment, Photo
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -22,3 +22,4 @@ admin.site.register(Follow, FollowAdmin)
 admin.site.register(Category)
 admin.site.register(Message)
 admin.site.register(Comment)
+admin.site.register(Photo)

@@ -29,29 +29,16 @@ class Category(models.Model):
         return self.title
 
 
-# class Photo(models.Model):
-#     image = models.ImageField(
-#         upload_to='profiles/',
-#         blank=True,
-#         verbose_name='Фото профиля',)
-#
-#     user = models.ForeignKey(
-#         settings.AUTH_USER_MODEL,
-#         on_delete=models.CASCADE,
-#         related_name='photos')
-#
-#     class Meta:
-#         verbose_name = 'Фотография'
-#         verbose_name_plural = 'Фотографии'
-
 
 class User(AbstractUser):
+    # image = models.ForeignKey(
+    #     Photo, null=True,
+    #     on_delete=models.SET_NULL,
+    #     verbose_name='Фото профиля',
+    #     related_name='users'
+    # )
     phone = PhoneNumberField(null=False, unique=True)
-    image = models.ImageField(
-        upload_to='profiles/',
-        blank=True,
-        verbose_name='Фото профиля',
-    )
+
     description = models.TextField(
         blank=True, verbose_name='Описание анкеты'
     )
@@ -98,6 +85,23 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'Name {self.username}, phone: {self.phone}, born: {self.year}'
+
+
+class Photo(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='image', verbose_name='Фото',)
+
+    image = models.ImageField(
+        upload_to='profiles/',
+        blank=True,
+        verbose_name='Фото',)
+
+    class Meta:
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Фотографии'
 
 
 class Follow(models.Model):

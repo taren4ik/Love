@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
+
+from profiles.models import User, Photo
 from .forms import CreationForm, ChangeForm
 
 User = get_user_model()
@@ -24,15 +26,19 @@ def ProfileChange(request):
             request.POST or None,
             files=request.FILES or None,
             instance=user)
-        # images = request.FILES.getlist('image')
+        images = request.FILES.getlist('image')
         if form.is_valid():
-            user = form.save(commit=False)
+            #user = form.save(commit=False)
+            for f in images:
+                data = f.read()  # Если файл целиком умещается в памяти
+                photo = Photo(user=user)
+                photo.image.save(f.name, ContentFile(data))
+                photo.save()
             # for f in images:
-            #     data = f.read()  # Если файл целиком умещается в памяти
-            #     photo = Photo(user=user)
-            #     photo.image.save(f.name, ContentFile(data))
-            #     photo.save()
-            user.save()
+            #     file_instance = User(image=f)
+            #     print(file_instance)
+            #     file_instance.save()
+            # user.save()
             return redirect('profiles:profile_detail', request.user.pk)
     else:
         form = ChangeForm(instance=user)
