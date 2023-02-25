@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponse
 
-from .models import User, Comment, Category, Follow, Message
+from .models import User, Comment, Category, Follow, Message, Photo
 from .forms import CommentForm, MessageForm
 
 COUNT_PROFILES = 10
@@ -20,12 +20,13 @@ def get_age(args):
 def index(request):
     template = 'profiles/index.html'
     profile_list = User.objects.select_related("category")
+    images = Photo.objects.filter(user=request.user.pk)
     paginator = Paginator(profile_list, COUNT_PROFILES)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    print(paginator)
     context = {
-        "page_obj": page_obj,
+        'page_obj': page_obj,
+        'images': images,
     }
     return render(request, template, context)
 
@@ -47,6 +48,7 @@ def profile_detail(request, profile_id):
     template = 'profiles/profile_detail.html'
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
+    images = Photo.objects.filter(user=request.user.pk)
     comments = Comment.objects.filter(profile_id=profile_id)
     age = get_age(profile_id)
     form = CommentForm(request.FILES or None)
@@ -58,6 +60,7 @@ def profile_detail(request, profile_id):
     context = {
         "profile": profile,
         "form": form,
+        'images': images,
         "comments": comments,
         'age': age,
         'following': following
@@ -93,7 +96,8 @@ def send_message(request, profile_id):
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
     messages = (Message.objects.filter(author=request.user, user=profile) |
-    Message.objects.filter(author=profile, user=request.user)).order_by('id')
+                Message.objects.filter(author=profile,
+                                       user=request.user)).order_by('id')
     form = MessageForm(request.POST or None)
     if form.is_valid():
         message = form.save(commit=False)
@@ -107,6 +111,7 @@ def send_message(request, profile_id):
         "messages": messages
     }
     return render(request, template, context)
+
 
 @login_required
 def index_message(request):

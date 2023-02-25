@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth import get_user_model
-from django.core.files.base import ContentFile
+
 
 from profiles.models import User, Photo
 from .forms import CreationForm, ChangeForm
@@ -22,23 +22,15 @@ def ProfileChange(request):
     if user.pk != request.user.pk:
         return redirect("profiles:profile_detail", request.user.pk)
     if request.method == "POST":
-        form = ChangeForm(
-            request.POST or None,
-            files=request.FILES or None,
-            instance=user)
+        form = ChangeForm(request.POST or None,
+                          files=request.FILES or None,
+                          instance=user)
         images = request.FILES.getlist('image')
         if form.is_valid():
-            #user = form.save(commit=False)
             for f in images:
-                data = f.read()  # Если файл целиком умещается в памяти
                 photo = Photo(user=user)
-                photo.image.save(f.name, ContentFile(data))
-                photo.save()
-            # for f in images:
-            #     file_instance = User(image=f)
-            #     print(file_instance)
-            #     file_instance.save()
-            # user.save()
+                photo.image.save(f.name, f, save=True)
+                #photo.save
             return redirect('profiles:profile_detail', request.user.pk)
     else:
         form = ChangeForm(instance=user)

@@ -29,14 +29,7 @@ class Category(models.Model):
         return self.title
 
 
-
 class User(AbstractUser):
-    # image = models.ForeignKey(
-    #     Photo, null=True,
-    #     on_delete=models.SET_NULL,
-    #     verbose_name='Фото профиля',
-    #     related_name='users'
-    # )
     phone = PhoneNumberField(null=False, unique=True)
 
     description = models.TextField(
