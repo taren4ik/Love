@@ -30,7 +30,7 @@ def ProfileChange(request):
             for f in images:
                 photo = Photo(user=user)
                 photo.image.save(f.name, f, save=True)
-                #photo.save
+
             return redirect('profiles:profile_detail', request.user.pk)
     else:
         form = ChangeForm(instance=user)

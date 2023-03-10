@@ -30,7 +30,10 @@ class Category(models.Model):
 
 
 class User(AbstractUser):
-    phone = PhoneNumberField(null=False, unique=True)
+    phone = PhoneNumberField(
+        null=False,
+        unique=True,
+        verbose_name='Телефон',)
 
     description = models.TextField(
         blank=True, verbose_name='Описание анкеты'

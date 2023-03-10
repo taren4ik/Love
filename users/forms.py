@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ClearableFileInput, ImageField
 
-
 User = get_user_model()
 
 
@@ -15,8 +14,9 @@ class CreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = (
-            'first_name', 'username', 'phone', 'email', 'sex', 'city', 'year',
-            'image')
+            'first_name', 'username', 'phone', 'email', 'sex', 'city',
+            'year', 'image',
+        )
 
 
 class ChangeForm(UserChangeForm):
@@ -24,10 +24,9 @@ class ChangeForm(UserChangeForm):
     image = ImageField(
         label=u'Фото профиля',
         widget=ClearableFileInput(attrs={'multiple': 'multiple'}),
-        required=False)
+        required=False,  )
 
     class Meta(UserChangeForm.Meta):
         model = User
         fields = (
-            'first_name', 'email', 'sex', 'city', 'year', 'image')
-
+            'first_name', 'email', 'sex', 'city', 'year', 'image',)

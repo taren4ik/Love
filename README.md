@@ -25,7 +25,7 @@ bash
 python -m venv venv
 ```
 
-Для *nix-систем:
+Для Unix-систем:
 ```
 bash
 source venv/bin/activate
@@ -75,7 +75,7 @@ http://127.0.0.1:8000/admin
 ```
 
 ***Автор проекта:***
-* Дмитрий Пермяков | Github:https://github.com/taren4ik | Разработчик, написание части с отзывами (Review) и комментариями (Comments): описание модели, представления, настройка эндпойнтов, определение прав доступа для запросов. Рейтинги произведений.
+* Дмитрий  | Github:https://github.com/taren4ik 
 
 
 [![CI](https://github.com/yandex-praktikum//actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)

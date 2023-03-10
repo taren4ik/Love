@@ -6,7 +6,7 @@ SECRET_KEY = 'vc%$ki1(@h*qqpih@4nth#s67454nqcq_r-3b&i87u@%4v_)cx'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'profiles.User'
 
@@ -92,9 +92,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+THUMBNAIL_DEBUG = True
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
 LOGIN_URL = 'users:login'
@@ -107,7 +111,3 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-THUMBNAIL_DEBUG = True

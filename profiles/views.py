@@ -20,7 +20,8 @@ def get_age(args):
 def index(request):
     template = 'profiles/index.html'
     profile_list = User.objects.select_related("category")
-    images = Photo.objects.filter(user=request.user.pk)
+    # images = Photo.objects.filter(user=request.user.pk)
+    images = Photo.objects.all()
     paginator = Paginator(profile_list, COUNT_PROFILES)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -48,7 +49,7 @@ def profile_detail(request, profile_id):
     template = 'profiles/profile_detail.html'
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
-    images = Photo.objects.filter(user=request.user.pk)
+    images = Photo.objects.filter(user=profile .pk)
     comments = Comment.objects.filter(profile_id=profile_id)
     age = get_age(profile_id)
     form = CommentForm(request.FILES or None)
