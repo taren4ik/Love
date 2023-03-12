@@ -49,7 +49,7 @@ def profile_detail(request, profile_id):
     template = 'profiles/profile_detail.html'
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
-    images = Photo.objects.filter(user=profile .pk)
+    images = Photo.objects.filter(user=profile.pk)
     comments = Comment.objects.filter(profile_id=profile_id)
     age = get_age(profile_id)
     form = CommentForm(request.FILES or None)

@@ -75,7 +75,6 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username', 'year', 'sex', 'city']
 
     class Meta:
-        # ordering = ('name',)
         verbose_name = 'Профайл'
         verbose_name_plural = 'Профайлы'
 
