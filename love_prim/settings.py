@@ -56,14 +56,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'love_prim.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -79,8 +77,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 
 LANGUAGE_CODE = 'en-ru'
 
@@ -100,7 +96,6 @@ THUMBNAIL_DEBUG = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'profiles:index'
 # LOGOUT_REDIRECT_URL = "posts:index"
@@ -110,4 +105,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
-

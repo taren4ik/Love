@@ -1,20 +1,19 @@
 import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.cache import cache_page
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .models import User, Comment, Category, Follow, Message, Photo
 from .forms import CommentForm, MessageForm
+from .models import Category, Comment, Follow, Message, Photo, User
 
 COUNT_PROFILES = 10
 
 
 def get_age(args):
     born = User.objects.get(id=args)
-    age = datetime.datetime.now().year - born.year
-    return age
+    return datetime.datetime.now().year - born.year
 
 
 def index(request):
@@ -96,9 +95,9 @@ def send_message(request, profile_id):
     template = "profiles/message.html"
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=profile_id)
-    messages = (Message.objects.filter(author=request.user, user=profile) |
-                Message.objects.filter(author=profile,
-                                       user=request.user)).order_by('id')
+    messages = (Message.objects.filter(author=request.user, user=profile)
+                | Message.objects.filter(author=profile,
+                                         user=request.user)).order_by('id')
     form = MessageForm(request.POST or None)
     if form.is_valid():
         message = form.save(commit=False)
@@ -120,8 +119,9 @@ def index_message(request):
     template = 'profiles/index_message.html'
     profile = get_object_or_404(User.objects.select_related('category'),
                                 id=request.user.pk)
-    messages = (Message.objects.filter(author_id=request.user.pk) |
-                Message.objects.filter(user_id=request.user.pk)).order_by('id')
+    messages = (Message.objects.filter(author_id=request.user.pk)
+                | Message.objects.filter(user_id=request.user.pk)).order_by(
+        'id')
     context = {
         "messages": messages,
         "profile": profile,
@@ -164,4 +164,4 @@ def profile_unfollow(request, profile_id):
 
 
 def city(request):
-    return HttpResponse(f'Город')
+    return HttpResponse('Город')

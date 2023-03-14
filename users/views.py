@@ -1,11 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.contrib.auth import get_user_model
 
+from profiles.models import Photo, User
 
-from profiles.models import User, Photo
-from .forms import CreationForm, ChangeForm
+from .forms import ChangeForm, CreationForm
 
 User = get_user_model()
 
