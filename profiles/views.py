@@ -69,6 +69,7 @@ def profile_detail(request, profile_id):
     return render(request, template, context)
 
 
+
 @login_required
 def profile_delete(request, profile_id):
     profile = User.objects.get(id=profile_id)
