@@ -6,7 +6,8 @@ SECRET_KEY = 'vc%$ki1(@h*qqpih@4nth#s67454nqcq_r-3b&i87u@%4v_)cx'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['loveprim.pythonanywhere.com',
+                 'www.loveprim.pythonanywhere.com']
 
 AUTH_USER_MODEL = 'profiles.User'
 
