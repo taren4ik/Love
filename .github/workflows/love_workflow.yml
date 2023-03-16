@@ -42,4 +42,4 @@ jobs:
         with:
           context: ./love_prim/
           push: true
-          tags: permyakoff/love_prim:v2
+          tags: permyakoff/love_prim:v1
