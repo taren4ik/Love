@@ -10,7 +10,6 @@ from .forms import ChangeForm, CreationForm
 User = get_user_model()
 
 
-
 class SignUp(CreateView):
     form_class = CreationForm
     success_url = reverse_lazy("profiles:index")
