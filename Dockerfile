@@ -1,11 +1,6 @@
 FROM python:3.11-slim
-
-WORKDIR /app
-
-COPY . .
-
-RUN pip3 install -r /app/requirements.txt --no-cache-dir
-
+COPY ./ /app
+RUN pip install -r /app/requirements.txt
+WORKDIR /app/love_prim/
 CMD python manage.py runserver 0:5000
-
 LABEL author='turgenevski@yandex.ru' version=1.0
