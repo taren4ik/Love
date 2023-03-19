@@ -40,6 +40,6 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          context: ./love_prim/
+          context: .
           push: true
           tags: permyakoff/love_prim:v1
