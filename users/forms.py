@@ -24,7 +24,7 @@ class ChangeForm(UserChangeForm):
     image = ImageField(
         label=u'Фото профиля',
         widget=ClearableFileInput(attrs={'multiple': 'multiple'}),
-        required=False,)
+        required=False, )
 
     class Meta(UserChangeForm.Meta):
         model = User

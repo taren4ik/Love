@@ -12,16 +12,16 @@ User = get_user_model()
 
 class SignUp(CreateView):
     form_class = CreationForm
-    success_url = reverse_lazy("profiles:index")
-    template_name = "users/signup.html"
+    success_url = reverse_lazy('profiles:index')
+    template_name = 'users/signup.html'
 
 
 def ProfileChange(request):
     user = get_object_or_404(User, pk=request.user.pk)
 
     if user.pk != request.user.pk:
-        return redirect("profiles:profile_detail", request.user.pk)
-    if request.method == "POST":
+        return redirect('profiles:profile_detail', request.user.pk)
+    if request.method == 'POST':
         form = ChangeForm(request.POST or None,
                           files=request.FILES or None,
                           instance=user)
@@ -35,7 +35,7 @@ def ProfileChange(request):
     else:
         form = ChangeForm(instance=user)
     context = {
-        "form": form,
-        "user": user,
+        'form': form,
+        'user': user,
     }
     return render(request, 'users/profile_change_form.html', context)
