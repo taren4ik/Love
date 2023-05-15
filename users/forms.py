@@ -6,16 +6,16 @@ User = get_user_model()
 
 
 class CreationForm(UserCreationForm):
-    image = ImageField(
-        label=u'Фото профиля',
-        widget=ClearableFileInput(attrs={'multiple': 'multiple'}),
-        required=False)
+    # image = ImageField(
+    #     label=u'Фото профиля',
+    #     widget=ClearableFileInput(attrs={'multiple': 'multiple'}),
+    #     required=False)
 
     class Meta(UserCreationForm.Meta):
         model = User
         fields = (
             'first_name', 'username', 'phone', 'email', 'sex', 'city',
-            'year', 'image',
+            'year', 'avatar',
         )
 
 
@@ -29,4 +29,4 @@ class ChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
         fields = (
-            'first_name', 'email', 'sex', 'city', 'year', 'image',)
+            'first_name', 'email', 'sex', 'city', 'year', 'image', 'avatar')

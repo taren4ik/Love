@@ -66,9 +66,13 @@ class User(AbstractUser):
         related_name='users'
     )
 
-    def get_absolute_url(self):
-        return reverse('profiles:profile_detail',
-                       kwargs={'profile_id': self.pk})
+    avatar = models.ImageField(
+        blank=True,
+        verbose_name='Аватар профиля',
+        null=False,
+    )
+
+
 
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['username', 'year', 'sex', 'city']
@@ -76,9 +80,14 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Профайл'
         verbose_name_plural = 'Профайлы'
+        ordering = ['-id']
 
     def __str__(self):
         return f'Name {self.username}, phone: {self.phone}, born: {self.year}'
+
+    def get_absolute_url(self):
+        return reverse('profiles:profile_detail',
+                       kwargs={'profile_id': self.pk})
 
 
 class Photo(models.Model):

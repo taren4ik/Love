@@ -81,6 +81,9 @@
       </ul>
     </aside>
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" >
+         {% thumbnail profile.avatar "400x200" crop="center" upscale=True as im %}
+           <img class="card-img my-2" src="{{ im.url }}">
+        {% endthumbnail %}
         {% for image in images %}
             {% thumbnail image.image "400x200" crop="right" upscale=True as im %}
               <img class="card-img my-2" src="{{ im.url }}">
