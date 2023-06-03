@@ -16,8 +16,6 @@ class SignUp(CreateView):
     template_name = 'users/signup.html'
 
 
-
-
 def ProfileChange(request):
     user = get_object_or_404(User, pk=request.user.pk)
 

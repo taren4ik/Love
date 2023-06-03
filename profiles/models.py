@@ -72,8 +72,6 @@ class User(AbstractUser):
         null=False,
     )
 
-
-
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['username', 'year', 'sex', 'city']
 
