@@ -1,5 +1,5 @@
 ***Cnfnec проекта:***
-[![CI](https://github.com/taren4ik//actions/workflows/love_workflow.yml/badge.svg?branch=master)](https://github.com/taren4ik/love/actions/workflows/love_workflow.yml)
+![CI](https://github.com/taren4ik//actions/workflows/love_workflow.yml/badge.svg?branch=master)](https://github.com/taren4ik/love/actions/workflows/love_workflow.yml)
 ![example workflow](https://github.com/taren4ik/love/actions/workflows/love_workflow.yml/badge.svg)
 
 
