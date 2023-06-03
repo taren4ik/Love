@@ -1,7 +1,6 @@
-***Cnfnec проекта:***
-![CI](https://github.com/taren4ik//actions/workflows/love_workflow.yml/badge.svg?branch=master)](https://github.com/taren4ik/love/actions/workflows/love_workflow.yml)
+***Статус проекта:***
+![CI](https://github.com/taren4ik//actions/workflows/love_workflow.yml/badge.svg?branch=master)
 ![example workflow](https://github.com/taren4ik/love/actions/workflows/love_workflow.yml/badge.svg)
-
 
 
 # Проект Love
@@ -9,10 +8,10 @@
 ### Описание. ###
 
 Проект **Love**  является первой социальной сетью в приморском крае. 
-В данном проекте реализовал кастомную модель User и форму регистрации и
-добавил функционал переписки между пользователями. Кроме того, 
-добавлена возможность множественной вставки изображений для создания
-мини-галереи изображений.
+В данном проекте создана кастомная модель User и форма регистрации. 
+Добавлен функционал переписки между пользователями. Кроме того, 
+реализована возможность множественной вставки изображений для 
+создания мини-галереи в каждом профиле.
 
 
 ### Как запустить проект:
