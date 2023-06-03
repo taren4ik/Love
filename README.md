@@ -1,5 +1,4 @@
 ***Статус проекта:***
-![CI](https://github.com/taren4ik//actions/workflows/love_workflow.yml/badge.svg?branch=master)
 ![example workflow](https://github.com/taren4ik/love/actions/workflows/love_workflow.yml/badge.svg)
 
 
@@ -79,6 +78,9 @@ bash
 http://127.0.0.1:8000
 http://127.0.0.1:8000/admin
 ```
+### URL- сайта
+https://loveprim.pythonanywhere.com/
 
 ***Автор проекта:***
 * Дмитрий  | Github:https://github.com/taren4ik/love
+
