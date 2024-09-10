@@ -58,7 +58,6 @@ class User(AbstractUser):
         default='Male',
         verbose_name='Пол',
     )
-
     category = models.ForeignKey(
         Category, null=True,
         on_delete=models.SET_NULL,
